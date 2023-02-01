@@ -63,8 +63,8 @@ class Editor extends FlxState
 	var yStepper:FlxUINumericStepper;
 	var scaleXStepper:FlxUINumericStepper;
 	var scaleYStepper:FlxUINumericStepper;
-	var angleSlider:FlxSlider;
-	var alphaSlider:FlxSlider;
+	var angleStepper:FlxUINumericStepper;
+	var alphaStepper:FlxUINumericStepper;
 	var colorInput:FlxInputText;
 	var visibleCheckbox:FlxUICheckBox;
 	var immovableCheckbox:FlxUICheckBox;
@@ -75,6 +75,7 @@ class Editor extends FlxState
 	var teleportToButton:FlxButton;
 
 	inline static var SIXTY = 60;
+	inline static var FIVE = 5;
 
 	function genItemSelectedGroup()
 	{
@@ -82,6 +83,13 @@ class Editor extends FlxState
 		yStepper = new FlxUINumericStepper(80, 30, 1, 0, -99999, 99999, 2);
 		scaleXStepper = new FlxUINumericStepper(10, xStepper.y + SIXTY, 1, 1, 0.01, 100, 2);
 		scaleYStepper = new FlxUINumericStepper(80, xStepper.y + SIXTY, 1, 1, 0.01, 100, 2);
+
+		angleStepper = new FlxUINumericStepper(10, scaleXStepper.y + SIXTY, 1, 0, -360, 360, 2);
+
+		alphaStepper = new FlxUINumericStepper(80, angleStepper.y, .1, 1, 0, 1, 2);
+
+		colorInput = new FlxInputText(10, alphaStepper.y + SIXTY, 150, "", 12);
+
 		UI_itemSelectedGroup.add(new FlxText(xStepper.x, xStepper.y - 20, 0, "X Pos", 12));
 		UI_itemSelectedGroup.add(xStepper);
 		UI_itemSelectedGroup.add(new FlxText(yStepper.x, yStepper.y - 20, 0, "Y Pos", 12));
@@ -90,6 +98,12 @@ class Editor extends FlxState
 		UI_itemSelectedGroup.add(scaleXStepper);
 		UI_itemSelectedGroup.add(new FlxText(scaleYStepper.x, scaleYStepper.y - 20, 0, "Y Scale", 12));
 		UI_itemSelectedGroup.add(scaleYStepper);
+		UI_itemSelectedGroup.add(new FlxText(angleStepper.x, angleStepper.y - 20, 0, "Angle", 12));
+		UI_itemSelectedGroup.add(angleStepper);
+		UI_itemSelectedGroup.add(new FlxText(alphaStepper.x, alphaStepper.y - 20, 0, "Alpha", 12));
+		UI_itemSelectedGroup.add(alphaStepper);
+		UI_itemSelectedGroup.add(new FlxText(colorInput.x, colorInput.y - 20, 0, "Color (#RRGGBB)", 12));
+		UI_itemSelectedGroup.add(colorInput);
 	}
 
 	function attachThingToMouse(o:FlxObject)
